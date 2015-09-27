@@ -43,10 +43,11 @@ class CustomerSpec extends Specification {
             Customer firstCustomer = new Customer(customerName: firstName, email: firstEmail)
             firstCustomer.save(flush:true)
 
-        then: "Another customer with same customerName is invalid"
-            Customer.count() == 1
             String secondEmail = 'second@customer.com'
             Customer customerWithSameCustomerName = new Customer(customerName: firstName, email: secondEmail)
+
+        then: "Another customer with same customerName is invalid"
+            Customer.count() == 1
             !customerWithSameCustomerName.validate()
     }
 
@@ -67,10 +68,11 @@ class CustomerSpec extends Specification {
             Customer firstCustomer = new Customer(customerName: firstName, email: firstEmail)
             firstCustomer.save(flush:true)
 
-        then: "Another customer with same customerName is invalid"
-            Customer.count() == 1
             String secondName = 'Second Name'
             Customer customerWithSameEmail = new Customer(customerName: secondName, email: firstEmail)
+
+        then: "Another customer with same customerName is invalid"
+            Customer.count() == 1
             !customerWithSameEmail.save(flush:true)
     }
 }
